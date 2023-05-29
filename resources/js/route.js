@@ -13,7 +13,11 @@ const router = createRouter({
                     alias: "",
                     name: "login",
                     component: () => import("./pages/Login.vue"),
-                    meta: { authorize: true, title: "Dashboard" },
+                },
+                {
+                    path: "/register",
+                    name: "register",
+                    component: () => import("./pages/Register.vue"),
                 },
             ],
         },

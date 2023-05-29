@@ -3,10 +3,12 @@
         <h1 class="text-3xl font-bold w-full text-center">Login</h1>
         <div class="mt-8">
             <form class="flex flex-col gap-4">
-                <InputComponent label="Email" required />
+                <InputComponent label="Username/Email" required />
                 <InputComponent type="password" label="Password" required />
                 <div class="flex justify-between items-center mt-4">
-                    <div class="text-blue-500">Register</div>
+                    <router-link to="register" class="text-blue-500"
+                        >Register</router-link
+                    >
                     <PrimaryButton>Login</PrimaryButton>
                 </div>
             </form>
