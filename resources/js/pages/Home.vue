@@ -1,6 +1,9 @@
 <template>
-    <h1>Test</h1>
+    <div class="">
+        <LoginForm />
+    </div>
 </template>
 
 <script setup>
+import LoginForm from '../components/forms/LoginForm.vue';
 </script>

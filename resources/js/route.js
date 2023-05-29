@@ -4,8 +4,18 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: "/",
-            component: () => import("./pages/Home.vue"),
+            name: "guestLayout",
+            path: "",
+            component: () => import("./templates/GuestTemplate.vue"),
+            children: [
+                {
+                    path: "/login",
+                    alias: "",
+                    name: "login",
+                    component: () => import("./pages/Login.vue"),
+                    meta: { authorize: true, title: "Dashboard" },
+                },
+            ],
         },
     ],
 });
