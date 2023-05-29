@@ -13,9 +13,9 @@
                     required
                 />
                 <div class="flex justify-between items-center mt-4">
-                    <router-link to="login" class="text-blue-500"
-                        >Login</router-link
-                    >
+                    <router-link to="login" class="text-blue-500">
+                        Login
+                    </router-link>
                     <PrimaryButton>Register</PrimaryButton>
                 </div>
             </form>

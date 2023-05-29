@@ -1,22 +1,18 @@
 <template>
-    <div class="w-screen sm:max-w-md mx-auto bg-white rounded py-10 px-4">
-        <h1 class="text-3xl font-bold w-full text-center">Login</h1>
-        <div class="mt-8">
-            <form class="flex flex-col gap-4">
-                <InputComponent label="Username/Email" required />
-                <InputComponent type="password" label="Password" required />
-                <div class="flex justify-between items-center mt-4">
-                    <router-link to="register" class="text-blue-500"
-                        >Register</router-link
-                    >
-                    <PrimaryButton>Login</PrimaryButton>
-                </div>
-            </form>
-        </div>
-    </div>
+    <FormComponent title="Login">
+        <InputComponent label="Username/Email" autofocus required />
+        <InputComponent type="password" label="Password" required />
+        <template #actions>
+            <RouterLink to="register" class="text-blue-500">
+                Register
+            </RouterLink>
+            <PrimaryButton>Login</PrimaryButton>
+        </template>
+    </FormComponent>
 </template>
 
 <script setup>
+import FormComponent from "../components/FormComponent.vue";
 import InputComponent from "../components/InputComponent.vue";
 import PrimaryButton from "../components/PrimaryButton.vue";
 </script>

@@ -17,9 +17,10 @@
 <script setup>
 import { onMounted, ref } from "vue";
 
-defineProps({
+const props = defineProps({
     modelValue: String,
     required: Boolean,
+    autofocus: Boolean,
     type: {
         String,
         default: "text",
@@ -35,7 +36,7 @@ defineEmits(["update:modelValue"]);
 const input = ref(null);
 
 onMounted(() => {
-    if (input.value.hasAttribute("autofocus")) {
+    if (props.autofocus) {
         input.value.focus();
     }
 });
