@@ -30,6 +30,12 @@ const router = createRouter({
             component: () => import("./pages/Welcome.vue"),
             meta: { authorize: true, title: "Welcome" },
         },
+        {
+            path: "/records",
+            name: "records",
+            component: () => import("./pages/Records/View.vue"),
+            meta: { authorize: true, title: "Records" },
+        },
     ],
 });
 

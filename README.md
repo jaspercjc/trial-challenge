@@ -10,10 +10,12 @@ the migration will seed
 
 -   2 roles (admin and guest)
 -   an admin user with
-    username: admin
-    email: admin@gmail.com
+    username: admin,
+    email: admin@gmail.com,
     password: password
 
 This can be used to login as administrator
+
+From the browser navigate to http://localhost:8000/
 
 Demo: <a href="http://growmodo-trial-task.herokuapp.com/">Trial Task</a>
