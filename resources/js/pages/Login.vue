@@ -52,7 +52,7 @@ const submit = async () => {
     await auth.login(input.value);
 
     if (auth.isAuthenticated) {
-        router.replace({ name: "dashboard" });
+        router.replace({ name: "welcome" });
     } else if (message) {
         setTimeout(() => {
             auth.errors = null;

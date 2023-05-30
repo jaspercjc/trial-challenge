@@ -61,4 +61,17 @@ class AuthController extends Controller
         //
     }
 
+    /**
+     * Handle user logout.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        return response()->noContent();
+    }
+
 }
