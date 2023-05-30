@@ -1,7 +1,13 @@
-navigate to the project directory and run the following from the terminal
+navigate to the project directory and create a .env file or rename .env.example to .env
+
+From the .env file, set the correct values for the database connection
+\*\*please note that if you are creating a new .env file, add VITE_APP_BASEURL variable with http://localhost:8000 as value
+
+run the following from the terminal
 
 -   npm install
 -   composer install
+-   php artisan key:generate
 -   php artisan migrate
 -   npm run dev
 -   php artisan serve (separate terminal)
