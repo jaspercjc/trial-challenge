@@ -97,4 +97,22 @@ class AuthController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * Handle user unsubscribe.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function unsubscribe(Request $request)
+    {
+        $user = Auth::user();
+
+        Auth::logout();
+        $request->session()->invalidate();
+
+        $user->delete();
+
+        return response()->noContent();
+    }
+
 }

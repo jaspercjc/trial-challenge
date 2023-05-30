@@ -12,7 +12,11 @@
                             View Records
                         </PrimaryButton>
                     </RouterLink>
-                    <PrimaryButton class="w-full md:w-auto" v-else>
+                    <PrimaryButton
+                        class="w-full md:w-auto"
+                        v-else
+                        @click="unsubscribe()"
+                    >
                         Unsubscribe
                     </PrimaryButton>
                     <PrimaryButton class="w-full md:w-auto" @click="logout()"
@@ -46,6 +50,13 @@ const me = computed(() => {
 async function logout() {
     loading.value = true;
     await auth.logout();
+    router.replace({ name: "login" });
+    loading.value = false;
+}
+
+async function unsubscribe() {
+    loading.value = true;
+    await auth.unsubscribe();
     router.replace({ name: "login" });
     loading.value = false;
 }

@@ -75,6 +75,12 @@ export const useAuthStore = defineStore("auth", {
                 });
         },
 
+        async unsubscribe() {
+            await axios.post("/api/auth/unsubscribe").then(() => {
+                return this.unset();
+            });
+        },
+
         async logout() {
             await axios.post("/api/logout").then(() => {
                 return this.unset();
