@@ -7,6 +7,7 @@
                     <RouterLink
                         :to="{ name: 'records' }"
                         v-if="me?.role == 'admin'"
+                        class="w-full md:w-auto"
                     >
                         <PrimaryButton class="w-full md:w-auto">
                             View Records
