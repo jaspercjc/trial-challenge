@@ -4,7 +4,7 @@
             {{ title }}
         </h1>
         <div class="mt-8">
-            <form class="flex flex-col gap-4">
+            <form class="flex flex-col gap-4" @submit.prevent="$emit('submit')">
                 <slot></slot>
                 <div class="flex justify-between items-center mt-4">
                     <slot name="actions"></slot>
@@ -21,4 +21,6 @@ defineProps({
         required: false,
     },
 });
+
+defineEmits(["submit"]);
 </script>

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from "@/stores/auth.store";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -21,7 +22,36 @@ const router = createRouter({
                 },
             ],
         },
+        {
+            path: "/welcome",
+            name: "welcome",
+            component: () => import("./pages/Welcome.vue"),
+            meta: { authorize: true },
+        },
     ],
+});
+
+router.beforeEach(async (to, from, next) => {
+    const publicPages = ["/", "/login", "/register"];
+    const authRequired = !publicPages.includes(to.path);
+    const auth = useAuthStore();
+    if (!auth.isAuthenticated) {
+        await auth.me();
+    }
+
+    if (!auth.isAuthenticated) {
+        if (authRequired) {
+            next({ name: "Login" });
+        } else {
+            next();
+        }
+    } else {
+        if (!authRequired) {
+            next({ name: "welcome" });
+        } else {
+            next();
+        }
+    }
 });
 
 export default router;
