@@ -49,9 +49,35 @@ export const useAuthStore = defineStore("auth", {
                 });
         },
 
+        async register(payload) {
+            await axios
+                .get("/sanctum/csrf-cookie")
+                .then(() => {})
+                .catch(() => {});
+            await axios
+                .post("/api/auth/register", payload)
+                .then(() => {
+                    this.errors = null;
+                    return this.me();
+                })
+                .catch((error) => {
+                    this.isAuthenticated = false;
+                    this.user = null;
+                    console.log(error.response.data.errors);
+                    if (error?.response?.status == 422) {
+                        this.errors = error.response.data.errors;
+                    } else {
+                        this.errors = {
+                            message:
+                                "Unable to process your request. Please try again later.",
+                        };
+                    }
+                });
+        },
+
         async logout() {
             await axios.post("/api/logout").then(() => {
-                return this.me();
+                return this.unset();
             });
         },
 

@@ -10,7 +10,11 @@
             :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
             required
+            :minlength="minlength"
         />
+        <div v-if="errors && name && errors[name]" class="text-sm text-red-500">
+            {{ errors[name][0] }}
+        </div>
     </div>
 </template>
 
@@ -21,12 +25,24 @@ const props = defineProps({
     modelValue: String,
     required: Boolean,
     autofocus: Boolean,
+    name: {
+        type: String,
+        required: false,
+    },
+    minlength: {
+        type: String,
+        required: false,
+    },
     type: {
-        String,
+        type: String,
         default: "text",
     },
     label: {
-        String,
+        type: String,
+        required: false,
+    },
+    errors: {
+        type: Object,
         required: false,
     },
 });

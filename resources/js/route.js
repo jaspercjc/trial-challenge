@@ -41,6 +41,14 @@ router.beforeEach(async (to, from, next) => {
         await auth.me();
     }
 
+    // set page title
+    const title = to.meta.title;
+    if (to.name == "welcome") {
+        document.title = "Welcome, " + auth.user.username;
+    } else {
+        document.title = title;
+    }
+
     // route validation
     if (!auth.isAuthenticated) {
         if (authRequired) {
@@ -52,14 +60,6 @@ router.beforeEach(async (to, from, next) => {
         if (!authRequired) {
             next({ name: "welcome" });
         } else {
-            // set page title
-            const title = to.meta.title;
-            if (to.name == "welcome") {
-                document.title = "Welcome, " + auth.user.username;
-            } else {
-                document.title = title;
-            }
-
             next();
         }
     }

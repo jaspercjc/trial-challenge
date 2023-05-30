@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -55,10 +57,31 @@ class AuthController extends Controller
 
     /**
      * Handles register.
+     * 
+     * @param  \App\Http\Requests\RegisterRequest  $request
+     * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        //
+        $input = $request->validated();
+
+        $user           = new User();
+        $user->username = $input['username'];
+        $user->email    = $input['email'];
+        $user->phone    = $input['phone'];
+        $user->password = Hash::make($input['password']);
+        $user->save();
+
+        if (
+            Auth::attempt([
+                'username' => $input['username'],
+                'password' => $input['password'],
+            ])
+        ) {
+            $request->session()->regenerate();
+        }
+
+        return response()->noContent();
     }
 
     /**
