@@ -14,11 +14,13 @@ const router = createRouter({
                     alias: "",
                     name: "login",
                     component: () => import("./pages/Login.vue"),
+                    meta: { title: "Login" },
                 },
                 {
                     path: "/register",
                     name: "register",
                     component: () => import("./pages/Register.vue"),
+                    meta: { title: "Register" },
                 },
             ],
         },
@@ -26,7 +28,7 @@ const router = createRouter({
             path: "/welcome",
             name: "welcome",
             component: () => import("./pages/Welcome.vue"),
-            meta: { authorize: true },
+            meta: { authorize: true, title: "Welcome" },
         },
     ],
 });
@@ -39,6 +41,7 @@ router.beforeEach(async (to, from, next) => {
         await auth.me();
     }
 
+    // route validation
     if (!auth.isAuthenticated) {
         if (authRequired) {
             next({ name: "Login" });
@@ -49,6 +52,14 @@ router.beforeEach(async (to, from, next) => {
         if (!authRequired) {
             next({ name: "welcome" });
         } else {
+            // set page title
+            const title = to.meta.title;
+            if (to.name == "welcome") {
+                document.title = "Welcome, " + auth.user.username;
+            } else {
+                document.title = title;
+            }
+
             next();
         }
     }

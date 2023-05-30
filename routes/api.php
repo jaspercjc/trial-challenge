@@ -19,4 +19,5 @@ Route::post('/auth/authenticate', [App\Http\Controllers\AuthController::class, '
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/auth/user', [App\Http\Controllers\AuthController::class, 'index']);
+    Route::resource("/users", \App\Http\Controllers\UserController::class);
 });
